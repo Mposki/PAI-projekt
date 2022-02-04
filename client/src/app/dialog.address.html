@@ -1,0 +1,35 @@
+<div style="text-align: center">
+  <h1 mat-dialog-title>Podaj adres</h1>
+  <div mat-dialog-content>
+    <p>Kraj</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Kraj</mat-label>
+      <input matInput [(ngModel)]="data.address.country">
+    </mat-form-field>
+    <p>Miasto</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Miasto</mat-label>
+      <input matInput [(ngModel)]="data.address.cityName">
+    </mat-form-field>
+    <p>Ulica</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ulica</mat-label>
+      <input matInput [(ngModel)]="data.address.streetName" maxlength="11">
+    </mat-form-field>
+    <p>Numer domu</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Nr domu</mat-label>
+      <input matInput [(ngModel)]="data.address.streetNumber" maxlength="11">
+    </mat-form-field>
+    <p>Mieszkanie</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Mieszkanie</mat-label>
+      <input matInput [(ngModel)]="data.address.locNumber" maxlength="11">
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions style="justify-content: center">
+    <button mat-button class="btn btn-primary button-header" (click)="onNoClick()">Przerwij</button>
+    <button mat-button class="btn btn-primary button-header" (click)="onOkClick()" cdkFocusInitial [disabled]="validate()">Dodaj</button>
+  </div>
+</div>

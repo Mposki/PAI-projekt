@@ -1,0 +1,47 @@
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  text-align: center !important;
+  vertical-align: middle !important;
+  justify-content: center !important;
+
+}
+
+.row-column {
+  flex: 25%;
+  text-align: center !important;
+  vertical-align: middle !important;
+  justify-content: center !important;
+
+}
+
+.container {
+  position: static;
+  width: 90%;
+  margin: 5%;
+}
+
+mat-table {
+  margin: 1%;
+  width: 98%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.button-header {
+  margin: 5px;
+}
+
+.tab {
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.th-center{
+  text-align: center;
+}

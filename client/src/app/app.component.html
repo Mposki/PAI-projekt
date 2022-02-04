@@ -1,0 +1,116 @@
+<head>
+
+</head>
+<body>
+<mat-toolbar>
+  <h1>System Zarządznia Pracownikami</h1>
+  <span class="spacer"></span>
+  <button class="btn btn-primary button-header" (click)="addNewEmployee()">Dodaj pracownika</button>
+  <button class="btn btn-primary button-header" (click)="addNewDepartment()">Dodaj dział</button>
+
+</mat-toolbar>
+ <div class="row">
+   <div class="column">
+
+     <mat-table [dataSource]="employeeTable" class="mat-elevation-z8 demo-table">
+       <ng-container matColumnDef="id">
+         <mat-header-cell *matHeaderCellDef>Identyfikator</mat-header-cell>
+         <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+       </ng-container>
+
+       <ng-container matColumnDef="name">
+         <mat-header-cell *matHeaderCellDef>Imię</mat-header-cell>
+         <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+       </ng-container>
+
+       <ng-container matColumnDef="surname">
+         <mat-header-cell *matHeaderCellDef>Nazwisko</mat-header-cell>
+         <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>
+       </ng-container>
+
+       <mat-header-row *matHeaderRowDef="displayedEmployeeColumns"></mat-header-row>
+       <mat-row
+         (click)="this.loadFullEmployeeData(row.id)"
+         *matRowDef="let row; columns: displayedEmployeeColumns;"
+       ></mat-row>
+     </mat-table>
+
+   </div>
+   <div class="column">
+      <h2>Pracownik {{this.selectedEmployee.firstName}} {{this.selectedEmployee.lastName}}</h2>
+     <mat-tab-group>
+       <mat-tab label="Dane osobowe">
+         <br>
+         <div>
+           <p>Data urodzenia:<span class="tab"></span>{{selectedEmployee.dateOfBirth.toString().slice(0, 10)}}</p>
+         </div>
+           <br>
+         <div>
+           <p>Pesel:<span class="tab"></span>{{selectedEmployee.pesel}}</p>
+         </div>
+           <br>
+         <div>
+           <p>Pensja:<span class="tab"></span>{{selectedEmployee.salary}} zł</p>
+         </div>
+         <br>
+         <div>
+           <p>Dział pracownika:<span class="tab"></span>{{selectedEmployeeDepartment.deptName}}</p>
+         </div>
+         <br>
+         <br>
+         <button class="btn btn-primary button-header" (click)="editEmployeeData()">Zmień dane osobowe</button>
+         <button class="btn btn-primary button-header" (click)="deleteEmployee(selectedEmployee.id)">Usuń pracownika</button>
+       </mat-tab>
+       <mat-tab label="Adres">
+         <br>
+         <div>
+           <p>Kraj:<span class="tab"></span>{{selectedEmployeeAddress.country}}</p>
+         </div>
+         <br>
+         <div>
+           <p>Miasto:<span class="tab"></span>{{selectedEmployeeAddress.cityName}}</p>
+         </div>
+         <br>
+         <div>
+           <p>Kod pocztowy:<span class="tab"></span>{{selectedEmployeeAddress.locNumber}}</p>
+         </div>
+         <br>
+         <div>
+           <p>Ulica:<span class="tab"></span>{{selectedEmployeeAddress.streetName}}</p>
+         </div>
+         <br>
+         <div>
+             <p>Numer:<span class="tab"></span>{{selectedEmployeeAddress.streetNumber}}</p>
+         </div>
+         <br>
+           <br>
+         <button class="btn btn-primary" *ngIf="selectedEmployee.addrId != 1; else dodawanie" (click)="editEmployeeAddress()">Zmień adres</button>
+         <ng-template #dodawanie>
+           <button class="btn btn-primary" (click)="addEmployeeAddress()">Dodaj adres</button>
+         </ng-template>
+       </mat-tab>
+       <mat-tab label="Podgląd działów">
+           <br>
+         <mat-table [dataSource]="departmentTable" class="mat-elevation-z8 demo-table">
+           <ng-container matColumnDef="masterDept">
+             <mat-header-cell *matHeaderCellDef>Dział nadrzędny</mat-header-cell>
+             <mat-cell *matCellDef="let element">{{getDepartmentName(element.masterDept)}}</mat-cell>
+           </ng-container>
+
+           <ng-container matColumnDef="deptName">
+             <mat-header-cell *matHeaderCellDef>Dział</mat-header-cell>
+             <mat-cell *matCellDef="let element">{{element.deptName}}</mat-cell>
+           </ng-container>
+
+           <mat-header-row *matHeaderRowDef="displayedDepartmentColumns"></mat-header-row>
+           <mat-row
+             (click)="this.editDepartmentData(row.id)"
+             *matRowDef="let row; columns: displayedDepartmentColumns;"
+           ></mat-row>
+         </mat-table>
+
+         </mat-tab>
+     </mat-tab-group>
+   </div>
+ </div>
+</body>
